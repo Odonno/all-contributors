@@ -1,0 +1,12 @@
+---
+source: tests/cli/generate.rs
+expression: stderr
+---
+Error: 
+   0: The configuration file '.all-contributorsrc' does not exist
+
+Location:
+   src/generate.rs:10
+
+Backtrace omitted. Run with RUST_BACKTRACE=1 environment variable to display it.
+Run with RUST_BACKTRACE=full to include source snippets.

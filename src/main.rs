@@ -8,6 +8,7 @@ use std::env;
 
 mod cli;
 mod generate;
+mod models;
 
 fn main() -> Result<()> {
     if env::var("NO_COLOR").unwrap_or(String::from("0")) == "1" {

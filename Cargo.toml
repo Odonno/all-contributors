@@ -12,7 +12,7 @@ serde_json = "1.0.140"
 [dev-dependencies]
 assert_cmd = "2.0.17"
 assert_fs = "1.1.2"
-insta = "1.42.2"
+insta = { version = "1.42.2", features = ["filters"] }
 
 [profile.dev.package]
 insta.opt-level = 3

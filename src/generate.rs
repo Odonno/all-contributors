@@ -1,11 +1,12 @@
 use color_eyre::eyre::{Result, eyre};
 use std::{fs, path::Path};
 
-use crate::models::{ContributionKind, ContributionType, Contributor, ContributorsConfig};
+use crate::{
+    constants::CONTRIBUTORS_CONFIG_FILENAME,
+    models::{ContributionKind, ContributionType, Contributor, ContributorsConfig},
+};
 
 pub fn main() -> Result<()> {
-    const CONTRIBUTORS_CONFIG_FILENAME: &str = ".all-contributorsrc";
-
     let exists = fs::exists(CONTRIBUTORS_CONFIG_FILENAME)?;
 
     if !exists {

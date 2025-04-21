@@ -8,6 +8,7 @@ use std::env;
 
 mod add;
 mod cli;
+mod constants;
 mod generate;
 mod models;
 

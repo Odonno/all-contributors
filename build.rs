@@ -54,11 +54,12 @@ fn generate_contribution_kinds_and_types() -> Result<()> {
 
         let mut content = String::new();
 
+        write_line(&mut content, "use clap::ValueEnum;");
         write_line(&mut content, "use color_eyre::eyre::{Error, Result, eyre};");
         write_line(&mut content, "use std::fmt;");
         write_line(&mut content, "");
 
-        write_line(&mut content, "#[derive(Debug, Clone)]");
+        write_line(&mut content, "#[derive(Debug, Clone, ValueEnum)]");
         write_line(&mut content, "pub enum ContributionKind {");
 
         for value in &values {

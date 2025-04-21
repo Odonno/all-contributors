@@ -1,0 +1,37 @@
+use assert_fs::TempDir;
+use color_eyre::eyre::{Error, Result};
+use insta::{Settings, assert_snapshot};
+use std::fs;
+
+use crate::helpers::{InstaSettingsExtensions, copy_config_file, create_cmd, get_stdout_str};
+
+#[test]
+fn add_an_existing_contribution_should_do_nothing() -> Result<()> {
+    let temp_dir = TempDir::new()?;
+
+    copy_config_file(&temp_dir)?;
+
+    let mut cmd = create_cmd(&temp_dir)?;
+
+    cmd.env("NO_COLOR", "1")
+        .arg("add")
+        .arg("tekacs")
+        .arg("code");
+
+    let assert = cmd.assert().try_success()?;
+    let stdout = get_stdout_str(assert)?;
+
+    let updated_config_file = fs::read_to_string(temp_dir.join(".all-contributorsrc"))?;
+
+    let mut insta_settings = Settings::new();
+    insta_settings.add_cli_location_filter();
+    insta_settings.bind(|| {
+        assert_snapshot!(stdout);
+        assert_snapshot!(updated_config_file);
+        Ok::<(), Error>(())
+    })?;
+
+    temp_dir.close()?;
+
+    Ok(())
+}

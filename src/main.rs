@@ -1,11 +1,12 @@
 use clap::Parser;
-use cli::{Action, Args};
+use cli::{Action, AddArgs, Args};
 use color_eyre::{
     config::{HookBuilder, Theme},
     eyre::Result,
 };
 use std::env;
 
+mod add;
 mod cli;
 mod generate;
 mod models;
@@ -23,5 +24,9 @@ fn main() -> Result<()> {
 
     match args.command {
         Action::Generate => generate::main(),
+        Action::Add(AddArgs {
+            login,
+            contributions,
+        }) => add::main(login, contributions),
     }
 }

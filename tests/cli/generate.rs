@@ -1,8 +1,7 @@
-use std::fs;
-
 use assert_fs::TempDir;
 use color_eyre::eyre::{Error, Result};
 use insta::{Settings, assert_snapshot};
+use std::fs;
 
 use crate::helpers::{
     InstaSettingsExtensions, copy_config_file, copy_readme_file, create_cmd, get_stderr_str,

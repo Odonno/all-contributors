@@ -1,7 +1,8 @@
+use clap::ValueEnum;
 use color_eyre::eyre::{Error, Result, eyre};
 use std::fmt;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, ValueEnum)]
 pub enum ContributionKind {
     Audio,
     A11Y,

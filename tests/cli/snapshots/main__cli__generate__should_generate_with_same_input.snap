@@ -1,0 +1,5 @@
+---
+source: tests/cli/generate.rs
+expression: stdout
+---
+

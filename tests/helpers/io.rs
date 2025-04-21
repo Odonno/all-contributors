@@ -8,3 +8,8 @@ pub fn copy_config_file(path: &Path) -> Result<()> {
     )?;
     Ok(())
 }
+
+pub fn copy_readme_file(path: &Path) -> Result<()> {
+    fs::copy("test-files/readme.md", path.join("readme.md"))?;
+    Ok(())
+}

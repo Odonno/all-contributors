@@ -1,0 +1,5 @@
+---
+source: tests/cli/add.rs
+expression: stdout
+---
+

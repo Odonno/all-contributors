@@ -9,7 +9,9 @@ expression: updated_config_file
     {
       "avatar_url": "https://avatars.githubusercontent.com/u/63247?v=4",
       "contributions": [
-        "code"
+        "code",
+        "ideas",
+        "bug"
       ],
       "login": "tekacs",
       "name": "Amar Sood",

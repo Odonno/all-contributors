@@ -91,3 +91,34 @@ fn should_add_new_contribution_to_existing_contributor() -> Result<()> {
 
     Ok(())
 }
+
+#[test]
+fn should_add_new_contributor_and_its_contributions() -> Result<()> {
+    let temp_dir = TempDir::new()?;
+
+    copy_config_file(&temp_dir)?;
+
+    let mut cmd = create_cmd(&temp_dir)?;
+
+    cmd.env("NO_COLOR", "1")
+        .arg("add")
+        .arg("odonno")
+        .arg("code,ideas");
+
+    let assert = cmd.assert().try_success()?;
+    let stdout = get_stdout_str(assert)?;
+
+    let updated_config_file = fs::read_to_string(temp_dir.join(".all-contributorsrc"))?;
+
+    let mut insta_settings = Settings::new();
+    insta_settings.add_cli_location_filter();
+    insta_settings.bind(|| {
+        assert_snapshot!(stdout);
+        assert_snapshot!(updated_config_file);
+        Ok::<(), Error>(())
+    })?;
+
+    temp_dir.close()?;
+
+    Ok(())
+}

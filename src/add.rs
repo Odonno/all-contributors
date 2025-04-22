@@ -4,7 +4,7 @@ use std::fs;
 
 use crate::{constants::CONTRIBUTORS_CONFIG_FILENAME, models::ContributionKind};
 
-pub fn main(login: Option<String>, contributions: Vec<ContributionKind>) -> Result<()> {
+pub async fn main(login: Option<String>, contributions: Vec<ContributionKind>) -> Result<()> {
     let exists = fs::exists(CONTRIBUTORS_CONFIG_FILENAME)?;
 
     if !exists {
@@ -55,7 +55,7 @@ pub fn main(login: Option<String>, contributions: Vec<ContributionKind>) -> Resu
                 .as_array_mut()
                 .unwrap();
 
-            for contribution in contributions {
+            for contribution in &contributions {
                 let contribution = contribution.to_string();
                 let contribution_value = Value::String(contribution);
 
@@ -69,7 +69,44 @@ pub fn main(login: Option<String>, contributions: Vec<ContributionKind>) -> Resu
     }
 
     if !login_found {
-        todo!("Add a new item to the array...");
+        let contributors_array = contributors_value.as_array_mut().ok_or_eyre(
+            "The 'contributors' property must be a JSON array in the configuration file",
+        )?;
+
+        let mut contributor_object = serde_json::Map::<String, Value>::with_capacity(5);
+        contributor_object.insert(String::from("login"), Value::String(login.to_string()));
+
+        // read user info from GitHub using GitHub API
+        let user = octocrab::instance().users(login).profile().await?;
+
+        contributor_object.insert(
+            String::from("name"),
+            Value::String(user.name.unwrap_or(String::new())),
+        );
+
+        contributor_object.insert(
+            String::from("avatar_url"),
+            Value::String(user.avatar_url.to_string()),
+        );
+
+        contributor_object.insert(
+            String::from("profile"),
+            Value::String(user.blog.unwrap_or(String::new())),
+        );
+
+        contributor_object.insert(
+            String::from("contributions"),
+            Value::Array(
+                contributions
+                    .iter()
+                    .map(|c| Value::String(c.to_string()))
+                    .collect(),
+            ),
+        );
+
+        let contributor_value = Value::Object(contributor_object);
+
+        contributors_array.push(contributor_value);
     }
 
     let output = serde_json::to_string_pretty(&config_value)?;

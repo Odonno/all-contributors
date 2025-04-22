@@ -12,7 +12,8 @@ mod constants;
 mod generate;
 mod models;
 
-fn main() -> Result<()> {
+#[tokio::main(flavor = "current_thread")]
+async fn main() -> Result<()> {
     if env::var("NO_COLOR").unwrap_or(String::from("0")) == "1" {
         HookBuilder::default()
             .theme(Theme::new()) // disable colors
@@ -28,6 +29,6 @@ fn main() -> Result<()> {
         Action::Add(AddArgs {
             login,
             contributions,
-        }) => add::main(login, contributions),
+        }) => add::main(login, contributions).await,
     }
 }

@@ -2,9 +2,24 @@ use color_eyre::eyre::{OptionExt, Result, eyre};
 use serde_json::Value;
 use std::fs;
 
-use crate::{constants::CONTRIBUTORS_CONFIG_FILENAME, models::ContributionKind};
+use crate::{
+    constants::CONTRIBUTORS_CONFIG_FILENAME,
+    models::{ContributionKind, ContributorsConfig},
+};
 
 pub async fn main(login: Option<String>, contributions: Vec<ContributionKind>) -> Result<()> {
+    let exists = fs::exists(CONTRIBUTORS_CONFIG_FILENAME)?;
+
+    if !exists {
+        return Err(eyre!(
+            "The configuration file '{}' does not exist",
+            CONTRIBUTORS_CONFIG_FILENAME
+        ));
+    }
+
+    let config_str = fs::read_to_string(CONTRIBUTORS_CONFIG_FILENAME)?;
+    let config: ContributorsConfig = serde_json::from_str(&config_str)?;
+
     let exists = fs::exists(CONTRIBUTORS_CONFIG_FILENAME)?;
 
     if !exists {
@@ -77,7 +92,10 @@ pub async fn main(login: Option<String>, contributions: Vec<ContributionKind>) -
         contributor_object.insert(String::from("login"), Value::String(login.to_string()));
 
         // read user info from GitHub using GitHub API
-        let user = octocrab::instance().users(login).profile().await?;
+        let user = octocrab::instance()
+            .users(login.to_string())
+            .profile()
+            .await?;
 
         contributor_object.insert(
             String::from("name"),
@@ -91,7 +109,10 @@ pub async fn main(login: Option<String>, contributions: Vec<ContributionKind>) -
 
         contributor_object.insert(
             String::from("profile"),
-            Value::String(user.blog.unwrap_or(String::new())),
+            Value::String(
+                user.blog
+                    .unwrap_or(format!("{}/{}", config.repo_host, login)),
+            ),
         );
 
         contributor_object.insert(

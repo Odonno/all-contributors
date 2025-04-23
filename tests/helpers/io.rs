@@ -13,3 +13,8 @@ pub fn copy_readme_file(path: &Path) -> Result<()> {
     fs::copy("test-files/readme.md", path.join("readme.md"))?;
     Ok(())
 }
+
+pub fn copy_simple_readme_file(path: &Path) -> Result<()> {
+    fs::copy("test-files/simple-readme.md", path.join("readme.md"))?;
+    Ok(())
+}

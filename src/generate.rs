@@ -28,7 +28,7 @@ pub fn main() -> Result<()> {
 
         let path = Path::new(filename);
 
-        update_contributors_list(&path, &config)?;
+        update_contributors_list(path, &config)?;
     }
 
     Ok(())
@@ -59,7 +59,7 @@ fn update_contributors_list(path: &Path, config: &ContributorsConfig) -> Result<
                 line_end = Some(index);
 
                 write_line(&mut new_content, START_LINE_STR);
-                generate_contributors_table(&mut new_content, &config)?;
+                generate_contributors_table(&mut new_content, config)?;
                 write_line(&mut new_content, END_LINE_STR);
             }
             continue;
@@ -99,14 +99,14 @@ fn generate_contributors_table(
             new_content.push_str(&width);
             new_content.push('%');
             new_content.push('"');
-            new_content.push_str(">");
+            new_content.push('>');
 
             // generate link with image & all
             new_content.push_str("<a href=");
             new_content.push('"');
             new_content.push_str(&contributor.profile);
             new_content.push('"');
-            new_content.push_str(">");
+            new_content.push('>');
 
             // generate img
             new_content.push_str("<img src=");
@@ -124,7 +124,7 @@ fn generate_contributors_table(
             new_content.push('"');
             new_content.push_str(&contributor.name);
             new_content.push('"');
-            new_content.push_str(">");
+            new_content.push('>');
 
             new_content.push_str("<br />");
 
@@ -141,7 +141,7 @@ fn generate_contributors_table(
             // generate contributions list per contributor
             for (index, contribution_code) in contributor.contributions.iter().enumerate() {
                 let kind = ContributionKind::try_from(contribution_code.to_string())?;
-                let contribution_type = ContributionType::try_from(kind.clone())?;
+                let contribution_type = ContributionType::from(kind.clone());
 
                 let link = generate_link(kind, config, contributor);
 
@@ -153,7 +153,7 @@ fn generate_contributors_table(
                 new_content.push('"');
                 new_content.push_str(&contribution_type.title);
                 new_content.push('"');
-                new_content.push_str(">");
+                new_content.push('>');
                 new_content.push_str(&contribution_type.emoji);
                 new_content.push_str("</a>");
 
@@ -223,6 +223,7 @@ fn write_line(new_content: &mut String, line: &str) {
     new_content.push('\n');
 }
 
-fn update_contributors_badge(path: &Path) -> Result<()> {
+#[allow(dead_code)]
+fn update_contributors_badge(_path: &Path) -> Result<()> {
     todo!();
 }

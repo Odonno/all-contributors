@@ -1,57 +1,57 @@
 use super::{ContributionKind, ContributionType};
 
-pub fn get_contribution_type_from_kind(kind: ContributionKind) -> Option<ContributionType> {
+pub fn get_contribution_type_from_kind(kind: ContributionKind) -> ContributionType {
     match kind {
-        ContributionKind::Audio => Some(ContributionType {
+        ContributionKind::Audio => ContributionType {
             kind: ContributionKind::Audio,
             code: String::from("audio"),
             emoji: String::from("🔊"),
             title: String::from("Audio"),
             description: String::from("Podcasts, background music or sound effects"),
-        }),
-        ContributionKind::A11Y => Some(ContributionType {
+        },
+        ContributionKind::A11Y => ContributionType {
             kind: ContributionKind::A11Y,
             code: String::from("a11y"),
             emoji: String::from("♿"),
             title: String::from("Accessibility"),
             description: String::from("Reporting or working on accessibility issues"),
-        }),
-        ContributionKind::Bug => Some(ContributionType {
+        },
+        ContributionKind::Bug => ContributionType {
             kind: ContributionKind::Bug,
             code: String::from("bug"),
             emoji: String::from("🐛"),
             title: String::from("Bug reports"),
             description: String::from("Links to issues reported by the user on this project"),
-        }),
-        ContributionKind::Blog => Some(ContributionType {
+        },
+        ContributionKind::Blog => ContributionType {
             kind: ContributionKind::Blog,
             code: String::from("blog"),
             emoji: String::from("📝"),
             title: String::from("Blogposts"),
             description: String::from("Links to the blogpost"),
-        }),
-        ContributionKind::Business => Some(ContributionType {
+        },
+        ContributionKind::Business => ContributionType {
             kind: ContributionKind::Business,
             code: String::from("business"),
             emoji: String::from("💼"),
             title: String::from("Business Development"),
             description: String::from("People who execute on the business end"),
-        }),
-        ContributionKind::Code => Some(ContributionType {
+        },
+        ContributionKind::Code => ContributionType {
             kind: ContributionKind::Code,
             code: String::from("code"),
             emoji: String::from("💻"),
             title: String::from("Code"),
             description: String::from("Links to commits by the user on this project"),
-        }),
-        ContributionKind::Content => Some(ContributionType {
+        },
+        ContributionKind::Content => ContributionType {
             kind: ContributionKind::Content,
             code: String::from("content"),
             emoji: String::from("🖋"),
             title: String::from("Content"),
             description: String::from("e.g. website copy, blog posts are separate"),
-        }),
-        ContributionKind::Data => Some(ContributionType {
+        },
+        ContributionKind::Data => ContributionType {
             kind: ContributionKind::Data,
             code: String::from("data"),
             emoji: String::from("🔣"),
@@ -60,8 +60,8 @@ pub fn get_contribution_type_from_kind(kind: ContributionKind) -> Option<Contrib
                 "Links to contributed data for the project (both tests and
                 datasets)",
             ),
-        }),
-        ContributionKind::Doc => Some(ContributionType {
+        },
+        ContributionKind::Doc => ContributionType {
             kind: ContributionKind::Doc,
             code: String::from("doc"),
             emoji: String::from("📖"),
@@ -70,29 +70,29 @@ pub fn get_contribution_type_from_kind(kind: ContributionKind) -> Option<Contrib
                 "Links to commits by the user on this project, Wiki, or other
                 source of documentation",
             ),
-        }),
-        ContributionKind::Design => Some(ContributionType {
+        },
+        ContributionKind::Design => ContributionType {
             kind: ContributionKind::Design,
             code: String::from("design"),
             emoji: String::from("🎨"),
             title: String::from("Design"),
             description: String::from("Links to the logo/iconography/visual design/etc."),
-        }),
-        ContributionKind::Example => Some(ContributionType {
+        },
+        ContributionKind::Example => ContributionType {
             kind: ContributionKind::Example,
             code: String::from("example"),
             emoji: String::from("💡"),
             title: String::from("Examples"),
             description: String::from("Links to the examples"),
-        }),
-        ContributionKind::EventOrganizing => Some(ContributionType {
+        },
+        ContributionKind::EventOrganizing => ContributionType {
             kind: ContributionKind::EventOrganizing,
             code: String::from("eventOrganizing"),
             emoji: String::from("📋"),
             title: String::from("Event Organizers"),
             description: String::from("Links to event page"),
-        }),
-        ContributionKind::Financial => Some(ContributionType {
+        },
+        ContributionKind::Financial => ContributionType {
             kind: ContributionKind::Financial,
             code: String::from("financial"),
             emoji: String::from("💵"),
@@ -101,29 +101,29 @@ pub fn get_contribution_type_from_kind(kind: ContributionKind) -> Option<Contrib
                 "People or orgs who provide financial support, links to relevant
                 page",
             ),
-        }),
-        ContributionKind::FundingFinding => Some(ContributionType {
+        },
+        ContributionKind::FundingFinding => ContributionType {
             kind: ContributionKind::FundingFinding,
             code: String::from("fundingFinding"),
             emoji: String::from("🔍"),
             title: String::from("Funding/Grant Finders"),
             description: String::from("People who help find financial support"),
-        }),
-        ContributionKind::Ideas => Some(ContributionType {
+        },
+        ContributionKind::Ideas => ContributionType {
             kind: ContributionKind::Ideas,
             code: String::from("ideas"),
             emoji: String::from("🤔"),
             title: String::from("Ideas, Planning, & Feedback"),
             description: String::from(""),
-        }),
-        ContributionKind::Infra => Some(ContributionType {
+        },
+        ContributionKind::Infra => ContributionType {
             kind: ContributionKind::Infra,
             code: String::from("infra"),
             emoji: String::from("🚇"),
             title: String::from("Infrastructure"),
             description: String::from("Infrastructure (Hosting, Build-Tools, etc)"),
-        }),
-        ContributionKind::Maintenance => Some(ContributionType {
+        },
+        ContributionKind::Maintenance => ContributionType {
             kind: ContributionKind::Maintenance,
             code: String::from("maintenance"),
             emoji: String::from("🚧"),
@@ -132,43 +132,43 @@ pub fn get_contribution_type_from_kind(kind: ContributionKind) -> Option<Contrib
                 "People who help in maintaining the repo, links to commits by the
                 user on this project",
             ),
-        }),
-        ContributionKind::Mentoring => Some(ContributionType {
+        },
+        ContributionKind::Mentoring => ContributionType {
             kind: ContributionKind::Mentoring,
             code: String::from("mentoring"),
             emoji: String::from("🧑"),
             title: String::from("Mentoring"),
             description: String::from("People who mentor new contributors, links to the repo home"),
-        }),
-        ContributionKind::Platform => Some(ContributionType {
+        },
+        ContributionKind::Platform => ContributionType {
             kind: ContributionKind::Platform,
             code: String::from("platform"),
             emoji: String::from("📦"),
             title: String::from("Packaging"),
             description: String::from("Porting to support a new platform"),
-        }),
-        ContributionKind::Plugin => Some(ContributionType {
+        },
+        ContributionKind::Plugin => ContributionType {
             kind: ContributionKind::Plugin,
             code: String::from("plugin"),
             emoji: String::from("🔌"),
             title: String::from("Plugin/utility libraries"),
             description: String::from("Links to the repo home"),
-        }),
-        ContributionKind::ProjectManagement => Some(ContributionType {
+        },
+        ContributionKind::ProjectManagement => ContributionType {
             kind: ContributionKind::ProjectManagement,
             code: String::from("projectManagement"),
             emoji: String::from("📆"),
             title: String::from("Project Management"),
             description: String::from(""),
-        }),
-        ContributionKind::Promotion => Some(ContributionType {
+        },
+        ContributionKind::Promotion => ContributionType {
             kind: ContributionKind::Promotion,
             code: String::from("promotion"),
             emoji: String::from("📣"),
             title: String::from("Promotion"),
             description: String::from(""),
-        }),
-        ContributionKind::Question => Some(ContributionType {
+        },
+        ContributionKind::Question => ContributionType {
             kind: ContributionKind::Question,
             code: String::from("question"),
             emoji: String::from("💬"),
@@ -177,22 +177,22 @@ pub fn get_contribution_type_from_kind(kind: ContributionKind) -> Option<Contrib
                 "Answering Questions in Issues, Stack Overflow, Gitter, Slack,
                 etc.",
             ),
-        }),
-        ContributionKind::Research => Some(ContributionType {
+        },
+        ContributionKind::Research => ContributionType {
             kind: ContributionKind::Research,
             code: String::from("research"),
             emoji: String::from("🔬"),
             title: String::from("Research"),
             description: String::from("Literature review."),
-        }),
-        ContributionKind::Review => Some(ContributionType {
+        },
+        ContributionKind::Review => ContributionType {
             kind: ContributionKind::Review,
             code: String::from("review"),
             emoji: String::from("👀"),
             title: String::from("Reviewed Pull Requests"),
             description: String::from(""),
-        }),
-        ContributionKind::Security => Some(ContributionType {
+        },
+        ContributionKind::Security => ContributionType {
             kind: ContributionKind::Security,
             code: String::from("security"),
             emoji: String::from("🛡"),
@@ -200,56 +200,55 @@ pub fn get_contribution_type_from_kind(kind: ContributionKind) -> Option<Contrib
             description: String::from(
                 "Identify and/or reduce security threats, GDPR, Privacy, etc",
             ),
-        }),
-        ContributionKind::Tool => Some(ContributionType {
+        },
+        ContributionKind::Tool => ContributionType {
             kind: ContributionKind::Tool,
             code: String::from("tool"),
             emoji: String::from("🔧"),
             title: String::from("Tools"),
             description: String::from("Links to the repo home"),
-        }),
-        ContributionKind::Translation => Some(ContributionType {
+        },
+        ContributionKind::Translation => ContributionType {
             kind: ContributionKind::Translation,
             code: String::from("translation"),
             emoji: String::from("🌍"),
             title: String::from("Translation"),
             description: String::from("Links to the translated content"),
-        }),
-        ContributionKind::Test => Some(ContributionType {
+        },
+        ContributionKind::Test => ContributionType {
             kind: ContributionKind::Test,
             code: String::from("test"),
             emoji: String::from("⚠"),
             title: String::from("Tests"),
             description: String::from("Links to commits by the user on this project"),
-        }),
-        ContributionKind::Tutorial => Some(ContributionType {
+        },
+        ContributionKind::Tutorial => ContributionType {
             kind: ContributionKind::Tutorial,
             code: String::from("tutorial"),
             emoji: String::from("✅"),
             title: String::from("Tutorials"),
             description: String::from("Links to the tutorial"),
-        }),
-        ContributionKind::Talk => Some(ContributionType {
+        },
+        ContributionKind::Talk => ContributionType {
             kind: ContributionKind::Talk,
             code: String::from("talk"),
             emoji: String::from("📢"),
             title: String::from("Talks"),
             description: String::from("Links to the slides/recording/repo/etc"),
-        }),
-        ContributionKind::UserTesting => Some(ContributionType {
+        },
+        ContributionKind::UserTesting => ContributionType {
             kind: ContributionKind::UserTesting,
             code: String::from("userTesting"),
             emoji: String::from("📓"),
             title: String::from("User Testing"),
             description: String::from("Links to user test notes"),
-        }),
-        ContributionKind::Video => Some(ContributionType {
+        },
+        ContributionKind::Video => ContributionType {
             kind: ContributionKind::Video,
             code: String::from("video"),
             emoji: String::from("📹"),
             title: String::from("Videos"),
             description: String::from("Links to the video"),
-        }),
-        _ => None,
+        },
     }
 }

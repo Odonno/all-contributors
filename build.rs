@@ -153,7 +153,7 @@ fn generate_contribution_kinds_and_types() -> Result<()> {
         write_line(&mut content, "");
         write_line(
             &mut content,
-            "pub fn get_contribution_type_from_kind(kind: ContributionKind) -> Option<ContributionType> {",
+            "pub fn get_contribution_type_from_kind(kind: ContributionKind) -> ContributionType {",
         );
 
         write_line(&mut content, "\tmatch kind {");
@@ -167,7 +167,7 @@ fn generate_contribution_kinds_and_types() -> Result<()> {
             let kind = format!("ContributionKind::{}", enum_value);
 
             content.push_str(&kind);
-            content.push_str(" => Some(ContributionType { ");
+            content.push_str(" => ContributionType { ");
 
             content.push_str("kind: ");
             content.push_str(&kind);
@@ -197,12 +197,11 @@ fn generate_contribution_kinds_and_types() -> Result<()> {
             content.push('"');
             content.push_str("), ");
 
-            content.push_str(" }),");
+            content.push_str(" },");
 
             write_line(&mut content, "");
         }
 
-        write_line(&mut content, "\t\t_ => None,");
         write_line(&mut content, "\t}");
         write_line(&mut content, "}");
 

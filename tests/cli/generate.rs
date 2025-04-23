@@ -37,7 +37,7 @@ fn fails_to_generate_if_one_file_does_not_exist() -> Result<()> {
 
     copy_config_file(&temp_dir)?;
 
-    let mut cmd = create_cmd(&temp_dir.path())?;
+    let mut cmd = create_cmd(temp_dir.path())?;
 
     cmd.env("NO_COLOR", "1").arg("generate");
 

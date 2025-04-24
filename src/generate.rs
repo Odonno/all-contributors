@@ -3,7 +3,7 @@ use std::{fs, path::Path};
 
 use crate::{
     config::retrieve_config,
-    models::{ContributionKind, ContributionType, Contributor, ContributorsConfig},
+    models::{ContributionKind, ContributionType, Contributor, ContributorsConfig, RepositoryType},
 };
 
 pub fn main() -> Result<()> {
@@ -175,6 +175,10 @@ fn generate_link(
     config: &ContributorsConfig,
     contributor: &Contributor,
 ) -> String {
+    if config.repo_type != RepositoryType::GitHub {
+        todo!("Only GitHub repositories are currently supported");
+    }
+
     match kind {
         ContributionKind::Bug | ContributionKind::Doc => {
             generate_link_to_issues(config, contributor)

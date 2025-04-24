@@ -2,22 +2,12 @@ use color_eyre::eyre::{Result, eyre};
 use std::{fs, path::Path};
 
 use crate::{
-    constants::CONTRIBUTORS_CONFIG_FILENAME,
+    config::retrieve_config,
     models::{ContributionKind, ContributionType, Contributor, ContributorsConfig},
 };
 
 pub fn main() -> Result<()> {
-    let exists = fs::exists(CONTRIBUTORS_CONFIG_FILENAME)?;
-
-    if !exists {
-        return Err(eyre!(
-            "The configuration file '{}' does not exist",
-            CONTRIBUTORS_CONFIG_FILENAME
-        ));
-    }
-
-    let config_str = fs::read_to_string(CONTRIBUTORS_CONFIG_FILENAME)?;
-    let config: ContributorsConfig = serde_json::from_str(&config_str)?;
+    let config = retrieve_config()?;
 
     for filename in &config.files {
         let exists = fs::exists(filename)?;

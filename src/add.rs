@@ -3,25 +3,13 @@ use serde_json::Value;
 use std::fs;
 
 use crate::{
-    constants::CONTRIBUTORS_CONFIG_FILENAME,
-    models::{ContributionKind, ContributorsConfig},
+    config::retrieve_config, constants::CONTRIBUTORS_CONFIG_FILENAME, models::ContributionKind,
 };
 
 pub async fn main(login: Option<String>, contributions: Vec<ContributionKind>) -> Result<()> {
-    let exists = fs::exists(CONTRIBUTORS_CONFIG_FILENAME)?;
-
-    if !exists {
-        return Err(eyre!(
-            "The configuration file '{}' does not exist",
-            CONTRIBUTORS_CONFIG_FILENAME
-        ));
-    }
-
-    let config_str = fs::read_to_string(CONTRIBUTORS_CONFIG_FILENAME)?;
-    let config: ContributorsConfig = serde_json::from_str(&config_str)?;
+    let config = retrieve_config()?;
 
     let exists = fs::exists(CONTRIBUTORS_CONFIG_FILENAME)?;
-
     if !exists {
         return Err(eyre!(
             "The configuration file '{}' does not exist",

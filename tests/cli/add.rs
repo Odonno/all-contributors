@@ -4,7 +4,8 @@ use insta::{Settings, assert_snapshot};
 use std::fs;
 
 use crate::helpers::{
-    InstaSettingsExtensions, copy_config_file, create_cmd, get_stderr_str, get_stdout_str,
+    InstaSettingsExtensions, copy_config_file, copy_readme_file, create_cmd, get_stderr_str,
+    get_stdout_str,
 };
 
 #[test]
@@ -115,6 +116,76 @@ fn should_add_new_contributor_and_its_contributions() -> Result<()> {
     insta_settings.bind(|| {
         assert_snapshot!(stdout);
         assert_snapshot!(updated_config_file);
+        Ok::<(), Error>(())
+    })?;
+
+    temp_dir.close()?;
+
+    Ok(())
+}
+
+#[test]
+fn should_add_new_contributor_and_its_contributions_and_then_apply_generate() -> Result<()> {
+    let temp_dir = TempDir::new()?;
+
+    copy_config_file(&temp_dir)?;
+    copy_readme_file(&temp_dir)?;
+
+    let mut cmd = create_cmd(&temp_dir)?;
+
+    cmd.env("NO_COLOR", "1")
+        .arg("add")
+        .arg("odonno")
+        .arg("code,ideas")
+        .arg("--generate");
+
+    let assert = cmd.assert().try_success()?;
+    let stdout = get_stdout_str(assert)?;
+
+    let updated_config_file = fs::read_to_string(temp_dir.join(".all-contributorsrc"))?;
+    let updated_readme = fs::read_to_string(temp_dir.join("readme.md"))?;
+
+    let mut insta_settings = Settings::new();
+    insta_settings.add_cli_location_filter();
+    insta_settings.bind(|| {
+        assert_snapshot!(stdout);
+        assert_snapshot!(updated_config_file);
+        assert_snapshot!(updated_readme);
+        Ok::<(), Error>(())
+    })?;
+
+    temp_dir.close()?;
+
+    Ok(())
+}
+
+#[test]
+fn should_add_new_contributor_and_its_contributions_and_then_apply_generate_alt() -> Result<()> {
+    let temp_dir = TempDir::new()?;
+
+    copy_config_file(&temp_dir)?;
+    copy_readme_file(&temp_dir)?;
+
+    let mut cmd = create_cmd(&temp_dir)?;
+
+    cmd.env("NO_COLOR", "1")
+        .arg("add")
+        .arg("odonno")
+        .arg("code,ideas")
+        .arg("--gen");
+
+    let assert = cmd.assert().try_success()?;
+    let stdout = get_stdout_str(assert)?;
+
+    let updated_config_file = fs::read_to_string(temp_dir.join(".all-contributorsrc"))?;
+    let updated_readme = fs::read_to_string(temp_dir.join("readme.md"))?;
+
+    let mut insta_settings = Settings::new();
+    insta_settings.add_cli_location_filter();
+    insta_settings.bind(|| {
+        assert_snapshot!(stdout);
+        assert_snapshot!(updated_config_file);
+        assert_snapshot!(updated_readme);
         Ok::<(), Error>(())
     })?;
 

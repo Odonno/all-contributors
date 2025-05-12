@@ -1,0 +1,95 @@
+---
+source: tests/cli/add.rs
+expression: updated_config_file
+---
+{
+  "commit": false,
+  "commitConvention": "gitmoji",
+  "contributors": [
+    {
+      "avatar_url": "https://avatars.githubusercontent.com/u/63247?v=4",
+      "contributions": [
+        "code"
+      ],
+      "login": "tekacs",
+      "name": "Amar Sood",
+      "profile": "http://www.tekacs.com/"
+    },
+    {
+      "avatar_url": "https://avatars.githubusercontent.com/u/21016014?v=4",
+      "contributions": [
+        "code",
+        "ideas",
+        "infra"
+      ],
+      "login": "Roms1383",
+      "name": "Rom's",
+      "profile": "https://github.com/Roms1383"
+    },
+    {
+      "avatar_url": "https://avatars.githubusercontent.com/u/10587083?v=4",
+      "contributions": [
+        "bug"
+      ],
+      "login": "pranaypratyush",
+      "name": "Pranay Pratyush",
+      "profile": "https://github.com/pranaypratyush"
+    },
+    {
+      "avatar_url": "https://avatars.githubusercontent.com/u/5788284?v=4",
+      "contributions": [
+        "ideas"
+      ],
+      "login": "ansarizafar",
+      "name": "Zafar Ansari",
+      "profile": "https://github.com/ansarizafar"
+    },
+    {
+      "avatar_url": "https://avatars.githubusercontent.com/u/28957605?v=4",
+      "contributions": [
+        "ideas"
+      ],
+      "login": "turulix",
+      "name": "Tim",
+      "profile": "https://turulix.de/"
+    },
+    {
+      "avatar_url": "https://avatars.githubusercontent.com/u/3688989?v=4",
+      "contributions": [
+        "bug"
+      ],
+      "login": "snarkipus",
+      "name": "Matt Jackson",
+      "profile": "https://github.com/snarkipus"
+    },
+    {
+      "avatar_url": "https://avatars.githubusercontent.com/u/53177682?v=4",
+      "contributions": [
+        "ideas"
+      ],
+      "login": "keyruu",
+      "name": "Lucas",
+      "profile": "https://github.com/keyruu"
+    },
+    {
+      "avatar_url": "https://avatars.githubusercontent.com/u/6053067?v=4",
+      "contributions": [
+        "code",
+        "ideas"
+      ],
+      "login": "odonno",
+      "name": "David Bottiau",
+      "profile": "https://dbottiau.fr"
+    }
+  ],
+  "contributorsPerLine": 7,
+  "files": [
+    "readme.md"
+  ],
+  "imageSize": 100,
+  "projectName": "surrealdb-migrations",
+  "projectOwner": "Odonno",
+  "repoHost": "https://github.com",
+  "repoType": "github",
+  "skipCi": true
+}

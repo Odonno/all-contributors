@@ -30,6 +30,7 @@ async fn main() -> Result<()> {
         Action::Add(AddArgs {
             login,
             contributions,
-        }) => add::main(login, contributions).await,
+            generate,
+        }) => add::main(login, contributions, generate).await,
     }
 }

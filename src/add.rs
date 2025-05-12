@@ -3,10 +3,15 @@ use serde_json::Value;
 use std::fs;
 
 use crate::{
-    config::retrieve_config, constants::CONTRIBUTORS_CONFIG_FILENAME, models::ContributionKind,
+    config::retrieve_config, constants::CONTRIBUTORS_CONFIG_FILENAME, generate,
+    models::ContributionKind,
 };
 
-pub async fn main(login: Option<String>, contributions: Vec<ContributionKind>) -> Result<()> {
+pub async fn main(
+    login: Option<String>,
+    contributions: Vec<ContributionKind>,
+    generate: bool,
+) -> Result<()> {
     let config = retrieve_config()?;
 
     let exists = fs::exists(CONTRIBUTORS_CONFIG_FILENAME)?;
@@ -120,6 +125,10 @@ pub async fn main(login: Option<String>, contributions: Vec<ContributionKind>) -
 
     let output = serde_json::to_string_pretty(&config_value)?;
     fs::write(CONTRIBUTORS_CONFIG_FILENAME, output)?;
+
+    if generate {
+        generate::main()?;
+    }
 
     Ok(())
 }

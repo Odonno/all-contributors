@@ -8,4 +8,6 @@ pub struct AddArgs {
     /// The list of contributions of this user you want to (separator: ',')
     #[clap(value_delimiter = ',')]
     pub contributions: Vec<ContributionKind>,
+    #[clap(long, aliases = vec!["gen"])]
+    pub generate: bool,
 }

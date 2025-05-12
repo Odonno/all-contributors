@@ -1,6 +1,6 @@
 [package]
 name = "all-contributors"
-version = "0.1.0"
+version = "0.2.0"
 description = "✨ Recognize all contributors, not just the ones who push code ✨"
 authors = ["David Bottiau"]
 repository = "https://github.com/Odonno/all-contributors/"
